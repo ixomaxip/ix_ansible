@@ -1,0 +1,6 @@
+id_rsa
+.env.local
+.idea
+.gitsecret/keys/random_seed
+!*.secret
+inventory.yaml
