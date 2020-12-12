@@ -1,0 +1,75 @@
+---
+- name: install packages
+  vars:
+    packages:
+    - zsh
+    - tmux
+    - curl
+    - aptitude 
+    - git
+    - tig 
+    - vim
+    - ccze
+    - jq 
+    - python3-pip 
+    - httpie 
+    - make 
+    - locate
+    - iotop 
+    - iozone3 
+    - iftop 
+    - bzip2 
+    - pv 
+    - pigz 
+    - ranger 
+    - mc 
+    - highlight 
+    - aria2 
+    - fdupes 
+    - ncdu
+    - vifm 
+    - lftp 
+    - ncftp 
+    - bwm-ng 
+    - netcat 
+    - nethogs 
+    - mtr 
+    - ngrep 
+    - nmap 
+    - vnstat 
+    - autossh 
+    - sshfs 
+    - dstat 
+    - pick 
+    - yank 
+    - iptraf 
+    - deborphan 
+    - pgcli 
+    - maybe 
+  apt:
+    name: "{{ packages }}"
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: template root .zshrc
+  copy:
+    src: .zshrc
+    dest: /root/.zshrc
+    mode: "0644"
+
+- name: template root .tmuxrc
+  copy:
+    src: .tmuxrc
+    dest: /root/.tmuxrc
+    mode: "0644"
+
+- name: chsh root to /usr/bin/zsh
+  user:
+    name: root
+    shell: /usr/bin/zsh
+
+- name: install oh-my-zsh
+  git:
+    repo: "https://github.com/robbyrussell/oh-my-zsh.git"
+    version: master
+    dest: "/root/.oh-my-zsh"
